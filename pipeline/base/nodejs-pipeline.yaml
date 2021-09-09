@@ -1,0 +1,19 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: nodejs-pipeline
+spec:
+  resources:
+    - name: pipeline-resource-type
+      type: pipeline-type
+  tasks:
+    - name: clone-repository
+      taskRef:
+        kind: ClusterTask
+        name: git-clone
+      params:
+        - name: url
+          value: https://github.com/jigneshkvp/express-sample-app.git
+      workspaces:
+        - name: output
+          workspace: pipeline-shared-data
