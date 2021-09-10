@@ -7,6 +7,9 @@ spec:
     - name: source-repo
       type: string
       description: Source code repository
+    - name: image-repo
+      type: string
+      description: Docker image repository
   workspaces:
     - name: pipeline-shared-data
   tasks:
@@ -29,6 +32,18 @@ spec:
         - name: ARGS
           value:
             - install-ci-test
+      workspaces:
+        - name: source
+          workspace: pipeline-shared-data
+    - name: build-and-push-image
+      runAfter:
+        - run-tests
+      taskRef:
+        kind: ClusterTask
+        name: buildah
+      params:
+        - name: IMAGE
+          value: "$(params.image-repo):$(tasks.clone-repository.results.commit)"
       workspaces:
         - name: source
           workspace: pipeline-shared-data
