@@ -1,4 +1,4 @@
 node_modules/
 .idea/
 manifests.yaml
-pipeline/base/*credentials.yaml
+pipeline/base/git-credentials.yaml
