@@ -1,3 +1,4 @@
 node_modules/
 .idea/
 manifests.yaml
+pipeline/base/*credentials.yaml
